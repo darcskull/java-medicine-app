@@ -1,0 +1,111 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+
+    <!-- Таблица за потребителите -->
+    <changeSet id="create_user_table" author="martin">
+        <createTable tableName="User">
+            <column name="id" type="INT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="firstName" type="VARCHAR(255)"/>
+            <column name="lastName" type="VARCHAR(255)"/>
+            <column name="password" type="VARCHAR(255)"/>
+            <column name="email" type="VARCHAR(255)"/>
+            <column name="phoneNumber" type="VARCHAR(20)"/>
+            <column name="personalNumber" type="VARCHAR(20)"/>
+            <column name="isDoctor" type="BOOLEAN"/>
+        </createTable>
+    </changeSet>
+
+    <!-- Таблица за болестите -->
+    <changeSet id="create_disease_table" author="martin">
+        <createTable tableName="Disease">
+            <column name="id" type="INT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="type" type="VARCHAR(255)"/>
+            <column name="description" type="VARCHAR(1000)"/>
+        </createTable>
+    </changeSet>
+
+    <!-- Таблица за лекарствата -->
+    <changeSet id="create_medicine_table" author="martin">
+        <createTable tableName="Medicine">
+            <column name="id" type="INT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="description" type="VARCHAR(1000)"/>
+            <column name="diseaseId" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="price" type="DECIMAL(10,2)"/>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="Medicine"
+                                 baseColumnNames="diseaseId"
+                                 constraintName="fk_disease_id"
+                                 referencedTableName="Disease"
+                                 referencedColumnNames="id"
+                                 onDelete="CASCADE"/>
+    </changeSet>
+
+    <!-- Таблица за диагнозите -->
+    <changeSet id="create_diagnosis_table" author="martin">
+        <createTable tableName="Diagnosis">
+            <column name="id" type="INT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="userId" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="diseaseId" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="Diagnosis"
+                                 baseColumnNames="userId"
+                                 constraintName="fk_user_id"
+                                 referencedTableName="User"
+                                 referencedColumnNames="id"
+                                 onDelete="CASCADE"/>
+        <addForeignKeyConstraint baseTableName="Diagnosis"
+                                 baseColumnNames="diseaseId"
+                                 constraintName="fk_diseases_id"
+                                 referencedTableName="Disease"
+                                 referencedColumnNames="id"
+                                 onDelete="CASCADE"/>
+    </changeSet>
+
+    <!-- Таблица за поръчките -->
+    <changeSet id="create_order_table" author="martin">
+        <createTable tableName="Order">
+            <column name="id" type="INT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="medicineId" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="number" type="INT"/>
+            <column name="price" type="DECIMAL(10,2)"/>
+            <column name="address" type="VARCHAR(255)"/>
+            <column name="userId" type="VARCHAR(255)"/>
+            <column name="phoneNumber" type="VARCHAR(20)"/>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="Order"
+                                 baseColumnNames="medicineId"
+                                 constraintName="fk_medicine_id"
+                                 referencedTableName="Medicine"
+                                 referencedColumnNames="id"
+                                 onDelete="CASCADE"/>
+        <addForeignKeyConstraint baseTableName="Order"
+                                 baseColumnNames="userId"
+                                 constraintName="fk_users_id"
+                                 referencedTableName="User"
+                                 referencedColumnNames="id"
+                                 onDelete="CASCADE"/>
+    </changeSet>
+
+</databaseChangeLog>
