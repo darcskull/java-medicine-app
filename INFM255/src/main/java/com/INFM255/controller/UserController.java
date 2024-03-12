@@ -2,11 +2,12 @@ package com.INFM255.controller;
 
 import com.INFM255.data.User;
 import com.INFM255.service.UserService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.ui.Model;
 
 import java.util.Map;
 
@@ -17,10 +18,12 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/login")
-    public ResponseEntity<User> login(@RequestBody Map<String, String> loginRequest) {
+    public ResponseEntity<User> login(@RequestBody Map<String, String> loginRequest, HttpSession session) {
         String email = loginRequest.get("email");
         String password = loginRequest.get("password");
-        return ResponseEntity.ok(userService.verifyLogin(email, password));
+        User user = userService.verifyLogin(email, password);
+        session.setAttribute("loggedInUser", user);
+        return ResponseEntity.ok(user);
     }
 
     @PostMapping("/register")
@@ -37,5 +40,11 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
+    @GetMapping("/test")
+    public String threadTest(HttpSession session, Model model) {
+        User user = (User) session.getAttribute("loggedInUser");
+        model.addAttribute("stringValue", user.toString());
+        return "test";
+    }
 
 }

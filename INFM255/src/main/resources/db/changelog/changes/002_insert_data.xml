@@ -25,6 +25,16 @@
             <column name="personalNumber" value="9876543210"/>
             <column name="isDoctor" value="true"/>
         </insert>
+        <insert tableName="User">
+            <column name="id" valueComputed="nextval('user_sequence')"/>
+            <column name="firstName" value="Jane"/>
+            <column name="lastName" value="Doe"/>
+            <column name="password" value="1234"/>
+            <column name="email" value="test@abv.bg"/>
+            <column name="phoneNumber" value="0888161656"/>
+            <column name="personalNumber" value="987654a210"/>
+            <column name="isDoctor" value="true"/>
+        </insert>
     </changeSet>
 
     <!-- Добавяне на примерни данни за заболявания -->
