@@ -19,14 +19,22 @@
                 body: JSON.stringify({ email: email, password: password })
             })
                 .then(response => {
-                    if (response.ok) {
-                        window.location.href = "/all";
-                    } else {
+                    if (!response.ok) {
                         errorMessage.textContent = "Invalid email or password.";
                         console.error("Login failed");
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.isDoctor) {
+                        window.location.href = "/all";
+                    } else {
+                        window.location.href = "/all";
                     }
                 })
                 .catch(error => {
+                    errorMessage.textContent = "An error occurred during login.";
                     console.error("Error:", error);
                 });
         }
@@ -45,7 +53,7 @@
     </div>
     <button type="button" onclick="login()">Login</button>
 </form>
-<form action="#" method="get">
+<form action="/reg" method="get">
     <button type="submit">Register</button>
 </form>
 

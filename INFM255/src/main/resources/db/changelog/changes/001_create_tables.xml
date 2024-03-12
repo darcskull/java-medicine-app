@@ -108,4 +108,24 @@
                                  onDelete="CASCADE"/>
     </changeSet>
 
+    <changeSet id="add_sequence_for_user_id" author="martin">
+        <createSequence sequenceName="user_sequence" startValue="1" incrementBy="1"/>
+    </changeSet>
+
+    <changeSet id="add_sequence_for_disease_id" author="martin">
+        <createSequence sequenceName="disease_sequence" startValue="1" incrementBy="1"/>
+    </changeSet>
+
+    <changeSet id="add_sequence_for_medicine_id" author="martin">
+        <createSequence sequenceName="medicine_sequence" startValue="1" incrementBy="1"/>
+    </changeSet>
+
+    <changeSet id="add_sequence_for_diagnosis_id" author="martin">
+        <createSequence sequenceName="diagnosis_sequence" startValue="1" incrementBy="1"/>
+    </changeSet>
+
+    <changeSet id="add_sequence_for_order_id" author="martin">
+        <createSequence sequenceName="order_sequence" startValue="1" incrementBy="1"/>
+    </changeSet>
+
 </databaseChangeLog>

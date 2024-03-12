@@ -60,7 +60,8 @@ public class UserRepository {
     }
 
     public void createUser(User user) {
-        String query = "INSERT INTO \"USER\" (firstName, lastName, email, password, phoneNumber, personalNumber, isDoctor) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO \"USER\" (id, firstName, lastName, email, password, phoneNumber, personalNumber, isDoctor) " +
+                "VALUES (nextval('user_sequence'),?, ?, ?, ?, ?, ?, ?)";
         jdbcTemplate.update(query,
                 user.getFirstName(),
                 user.getLastName(),
@@ -70,4 +71,11 @@ public class UserRepository {
                 user.getPersonalNumber(),
                 user.getIsDoctor());
     }
+
+    public Boolean doesUserExistByEmail(String email) {
+        String query = "SELECT COUNT(*) FROM \"USER\" WHERE email = ?";
+        int count = jdbcTemplate.queryForObject(query, Integer.class, email);
+        return count > 0;
+    }
+
 }

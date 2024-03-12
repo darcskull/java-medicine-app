@@ -6,22 +6,22 @@
     <!-- Добавяне на примерни данни за потребители -->
     <changeSet id="insert_sample_users" author="martin">
         <insert tableName="User">
-            <column name="id" value="1"/>
+            <column name="id" valueComputed="nextval('user_sequence')"/>
             <column name="firstName" value="John"/>
             <column name="lastName" value="Doe"/>
             <column name="password" value="password1"/>
             <column name="email" value="john@example.com"/>
-            <column name="phoneNumber" value="1234567890"/>
+            <column name="phoneNumber" value="0888161650"/>
             <column name="personalNumber" value="1234567890"/>
             <column name="isDoctor" value="false"/>
         </insert>
         <insert tableName="User">
-            <column name="id" value="2"/>
+            <column name="id" valueComputed="nextval('user_sequence')"/>
             <column name="firstName" value="Jane"/>
             <column name="lastName" value="Doe"/>
             <column name="password" value="password2"/>
             <column name="email" value="jane@example.com"/>
-            <column name="phoneNumber" value="9876543210"/>
+            <column name="phoneNumber" value="0888161651"/>
             <column name="personalNumber" value="9876543210"/>
             <column name="isDoctor" value="true"/>
         </insert>
