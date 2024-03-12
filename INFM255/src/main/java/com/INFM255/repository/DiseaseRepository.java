@@ -24,7 +24,7 @@ public class DiseaseRepository {
     }
 
     public void createDisease(Disease disease) {
-        String query = "INSERT INTO Disease (name, type, description) VALUES (?, ?, ?)";
+        String query = "INSERT INTO Disease (id,name, type, description) VALUES (nextval('disease_sequence'),?, ?, ?)";
         jdbcTemplate.update(query, disease.getName(), disease.getType(), disease.getDescription());
     }
 

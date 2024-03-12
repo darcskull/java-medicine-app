@@ -47,7 +47,8 @@ public class OrderRepository {
     }
 
     public void createOrder(Order order) {
-        String query = "INSERT INTO \"Order\" (medicineId, number, price, address, userId, phoneNumber) VALUES (?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO \"Order\" (id,medicineId, number, price, address, userId, phoneNumber) " +
+                "VALUES (nextval('order_sequence'),?, ?, ?, ?, ?, ?)";
         jdbcTemplate.update(query,
                 order.getMedicineId(),
                 order.getNumber(),

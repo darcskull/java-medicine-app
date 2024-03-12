@@ -25,7 +25,7 @@ public class DiagnosisRepository {
     }
 
     public void createDiagnosis(Diagnosis diagnosis) {
-        String query = "INSERT INTO Diagnosis (userId, diseaseId) VALUES (?, ?)";
+        String query = "INSERT INTO Diagnosis (id,userId, diseaseId) VALUES (nextval('diagnosis_sequence'),?, ?)";
         jdbcTemplate.update(query, diagnosis.getUserId(), diagnosis.getDiseaseId());
     }
 

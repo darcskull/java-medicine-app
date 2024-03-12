@@ -23,7 +23,8 @@ public class MedicineRepository {
     }
 
     public void createMedicine(Medicine medicine) {
-        String query = "INSERT INTO Medicine (name, description, diseaseId, price) VALUES (?, ?, ?, ?)";
+        String query = "INSERT INTO Medicine (id,name, description, diseaseId, price) " +
+                "VALUES (nextval('medicine_sequence'),?, ?, ?, ?)";
         jdbcTemplate.update(query,
                 medicine.getName(),
                 medicine.getDescription(),
