@@ -22,7 +22,7 @@ public class OrderRepository {
     }
 
     public List<Order> findOrdersByUserId(String userId) {
-        String query = "SELECT * FROM \"Order\" WHERE userId = ?";
+        String query = "SELECT * FROM \"ORDER\" WHERE userId = ?";
         List<Map<String, Object>> rows = jdbcTemplate.queryForList(query, userId);
         List<Order> orders = new ArrayList<>();
 
@@ -42,12 +42,12 @@ public class OrderRepository {
     }
 
     public void deleteOrderById(Integer orderId) {
-        String query = "DELETE FROM \"Order\" WHERE id = ?";
+        String query = "DELETE FROM \"ORDER\" WHERE id = ?";
         jdbcTemplate.update(query, orderId);
     }
 
     public void createOrder(Order order) {
-        String query = "INSERT INTO \"Order\" (id,medicineId, number, price, address, userId, phoneNumber) " +
+        String query = "INSERT INTO \"ORDER\" (id,medicineId, number, price, address, userId, phoneNumber) " +
                 "VALUES (nextval('order_sequence'),?, ?, ?, ?, ?, ?)";
         jdbcTemplate.update(query,
                 order.getMedicineId(),

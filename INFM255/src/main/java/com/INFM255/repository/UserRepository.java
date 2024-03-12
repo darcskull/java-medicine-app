@@ -19,8 +19,8 @@ public class UserRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public List<User> findAllUsers() {
-        List<Map<String, Object>> rows =  jdbcTemplate.queryForList("SELECT * FROM \"USER\" WHERE isDoctor = ?", false);
+    public List<User> findAllUsers(Boolean isDoctor) {
+        List<Map<String, Object>> rows =  jdbcTemplate.queryForList("SELECT * FROM \"USER\" WHERE isDoctor = ?", isDoctor);
         List<User> users = new ArrayList<>();
 
         for (Map<String, Object> row : rows) {

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Object Table</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+<form action="/" method="get">
+    <button type="submit">Logout</button>
+
+</form>
+<form action="/test" method="get">
+<button type="submit">Medicines</button>
+</form>
+<form action="/test" method="get">
+    <button type="submit">Diseases</button>
+</form>
+<form action="/test" method="get">
+    <button type="submit">Orders</button>
+</form>
+<h2>Available Doctors</h2>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.firstName}"></td>
+        <td th:text="${user.lastName}"></td>
+        <td th:text="${user.email}"></td>
+        <td th:text="${user.phoneNumber}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

@@ -33,7 +33,7 @@
             <column name="email" value="test@abv.bg"/>
             <column name="phoneNumber" value="0888161656"/>
             <column name="personalNumber" value="987654a210"/>
-            <column name="isDoctor" value="true"/>
+            <column name="isDoctor" value="false"/>
         </insert>
     </changeSet>
 

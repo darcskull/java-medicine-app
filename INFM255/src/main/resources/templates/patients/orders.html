@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Order List</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+<h2>Order List</h2>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Medicine ID</th>
+        <th>Number</th>
+        <th>Price</th>
+        <th>Address</th>
+        <th>User ID</th>
+        <th>Phone Number</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="order : ${orderList}">
+        <td th:text="${order.id}"></td>
+        <td th:text="${order.medicineId}"></td>
+        <td th:text="${order.number}"></td>
+        <td th:text="${order.price}"></td>
+        <td th:text="${order.address}"></td>
+        <td th:text="${order.userId}"></td>
+        <td th:text="${order.phoneNumber}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

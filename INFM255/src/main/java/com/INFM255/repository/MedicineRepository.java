@@ -23,7 +23,7 @@ public class MedicineRepository {
     }
 
     public void createMedicine(Medicine medicine) {
-        String query = "INSERT INTO Medicine (id,name, description, diseaseId, price) " +
+        String query = "INSERT INTO MEDICINE (id,name, description, diseaseId, price) " +
                 "VALUES (nextval('medicine_sequence'),?, ?, ?, ?)";
         jdbcTemplate.update(query,
                 medicine.getName(),
@@ -33,7 +33,7 @@ public class MedicineRepository {
     }
 
     public List<Medicine> findAllMedicines() {
-        String query = "SELECT * FROM Medicine";
+        String query = "SELECT * FROM MEDICINE";
         return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(Medicine.class));
     }
 }

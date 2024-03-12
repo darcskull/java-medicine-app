@@ -17,8 +17,12 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    public List<User> getAllUsers() {
-        return userRepository.findAllUsers();
+    public List<User> getAllPatients() {
+        return userRepository.findAllUsers(false);
+    }
+
+    public List<User> getAllDoctors() {
+        return userRepository.findAllUsers(true);
     }
 
     public User verifyLogin(String email, String password) {

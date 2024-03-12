@@ -20,17 +20,17 @@ public class DiagnosisRepository {
     }
 
     public List<Diagnosis> findDiagnosesByUserId(Integer userId) {
-        String query = "SELECT * FROM Diagnosis WHERE userId = ?";
+        String query = "SELECT * FROM DIAGNOSIS WHERE userId = ?";
         return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(Diagnosis.class), userId);
     }
 
     public void createDiagnosis(Diagnosis diagnosis) {
-        String query = "INSERT INTO Diagnosis (id,userId, diseaseId) VALUES (nextval('diagnosis_sequence'),?, ?)";
+        String query = "INSERT INTO DIAGNOSIS (id,userId, diseaseId) VALUES (nextval('diagnosis_sequence'),?, ?)";
         jdbcTemplate.update(query, diagnosis.getUserId(), diagnosis.getDiseaseId());
     }
 
     public List<Diagnosis> findAllDiagnoses() {
-        String query = "SELECT * FROM Diagnosis";
+        String query = "SELECT * FROM DIAGNOSIS";
         return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(Diagnosis.class));
     }
 

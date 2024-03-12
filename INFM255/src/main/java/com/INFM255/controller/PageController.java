@@ -22,9 +22,15 @@ public class PageController {
         return "registration";
     }
 
-    @GetMapping("/all")
+    @GetMapping("/patients")
     public String getAllPatients(Model model) {
-        model.addAttribute("users", userService.getAllUsers());
-        return "table";
+        model.addAttribute("users", userService.getAllPatients());
+        return "doctors/table";
+    }
+
+    @GetMapping("/doctors")
+    public String getAllDoctors(Model model) {
+        model.addAttribute("users", userService.getAllDoctors());
+        return "patients/table";
     }
 }

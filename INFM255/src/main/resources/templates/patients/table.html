@@ -19,7 +19,20 @@
     </style>
 </head>
 <body>
-<h2>Object Table</h2>
+<form action="/" method="get">
+    <button type="submit">Logout</button>
+
+</form>
+<form action="/test" method="get">
+<button type="submit">Medicines</button>
+</form>
+<form action="/test" method="get">
+    <button type="submit">Diseases</button>
+</form>
+<form action="/orders" method="get">
+    <button type="submit">Orders</button>
+</form>
+<h2>Available Doctors</h2>
 <table>
     <thead>
     <tr>
@@ -28,8 +41,6 @@
         <th>Last Name</th>
         <th>Email</th>
         <th>Phone Number</th>
-        <th>Personal Number</th>
-        <th>Is Doctor</th>
     </tr>
     </thead>
     <tbody>
@@ -39,8 +50,6 @@
         <td th:text="${user.lastName}"></td>
         <td th:text="${user.email}"></td>
         <td th:text="${user.phoneNumber}"></td>
-        <td th:text="${user.personalNumber}"></td>
-        <td th:text="${user.isDoctor} ? 'Yes' : 'No'"></td>
     </tr>
     </tbody>
 </table>

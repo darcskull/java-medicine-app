@@ -19,12 +19,12 @@ public class DiseaseRepository {
     }
 
     public List<Disease> findAllDiseases() {
-        String query = "SELECT * FROM Disease";
+        String query = "SELECT * FROM DISEASE";
         return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(Disease.class));
     }
 
     public void createDisease(Disease disease) {
-        String query = "INSERT INTO Disease (id,name, type, description) VALUES (nextval('disease_sequence'),?, ?, ?)";
+        String query = "INSERT INTO DISEASE (id,name, type, description) VALUES (nextval('disease_sequence'),?, ?, ?)";
         jdbcTemplate.update(query, disease.getName(), disease.getType(), disease.getDescription());
     }
 
