@@ -16,27 +16,43 @@
         th {
             background-color: #f2f2f2;
         }
+        body {
+            background-color: #f0f0f0;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
 <form action="/" method="get">
     <button type="submit">Logout</button>
-
 </form>
 <form action="/test" method="get">
 <button type="submit">Medicines</button>
 </form>
-<form action="/test" method="get">
+<form action="/diseases" method="get">
     <button type="submit">Diseases</button>
 </form>
 <form action="/test" method="get">
-    <button type="submit">Orders</button>
+    <button type="submit">Diagnosis</button>
 </form>
-<h2>Available Doctors</h2>
+<h2>Patients</h2>
 <table>
     <thead>
     <tr>
-        <th>ID</th>
+        <th>Personal Identifier</th>
         <th>First Name</th>
         <th>Last Name</th>
         <th>Email</th>
@@ -45,7 +61,7 @@
     </thead>
     <tbody>
     <tr th:each="user : ${users}">
-        <td th:text="${user.id}"></td>
+        <td th:text="${user.personalNumber}"></td>
         <td th:text="${user.firstName}"></td>
         <td th:text="${user.lastName}"></td>
         <td th:text="${user.email}"></td>
