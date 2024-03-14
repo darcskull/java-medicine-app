@@ -16,7 +16,7 @@ public class MedicineController {
     private final MedicineService medicineService;
 
     @GetMapping("/medicines")
-    public String findOrdersForUser(Model model) {
+    public String findMedicines(Model model) {
         List<MedicineView> medicines = medicineService.findAllMedicines();
         model.addAttribute("medicines", medicines);
         return "doctors/medicine";

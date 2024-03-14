@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Medicines</title>
+    <title>Diagnosis</title>
     <style>
         .form-container {
             display: inline-block;
@@ -42,37 +42,42 @@
 <form action="/" method="get">
     <button type="submit">Logout</button>
 </form>
-
 <form action="/patients" method="get" class="form-container">
     <button type="submit">Patients</button>
 </form>
-
+<form action="/medicines" method="get" class="form-container">
+    <button type="submit">Medicines</button>
+</form>
 <form action="/diseases" method="get" class="form-container">
     <button type="submit">Diseases</button>
 </form>
-
-<form action="/diagnosis" method="get" class="form-container">
-    <button type="submit">Diagnosis</button>
+<form action="/create/diagnose" method="get">
+    <button type="submit">Create new Diagnosis</button>
 </form>
-<form action="/test" method="get">
-    <button type="submit">Add new Medicine</button>
-</form>
-<h2>Medicines</h2>
+<h2>Diagnosis</h2>
 <table>
     <thead>
     <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Disease</th>
-        <th>Price $</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+        <th>Personal Number</th>
+        <th>Disease Name</th>
+        <th>Disease Type</th>
+        <th>Disease Description</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="medicine : ${medicines}">
-        <td th:text="${medicine.name}"></td>
-        <td th:text="${medicine.description}"></td>
-        <td th:text="${medicine.disease}"></td>
-        <td th:text="${medicine.price}"></td>
+    <tr th:each="diagnosis : ${diagnosisViews}">
+        <td th:text="${diagnosis.firstName}"></td>
+        <td th:text="${diagnosis.lastName}"></td>
+        <td th:text="${diagnosis.email}"></td>
+        <td th:text="${diagnosis.phoneNumber}"></td>
+        <td th:text="${diagnosis.personalNumber}"></td>
+        <td th:text="${diagnosis.diseaseName}"></td>
+        <td th:text="${diagnosis.diseaseType}"></td>
+        <td th:text="${diagnosis.diseaseDescription}"></td>
     </tr>
     </tbody>
 </table>

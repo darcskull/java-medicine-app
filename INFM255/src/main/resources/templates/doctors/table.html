@@ -42,21 +42,16 @@
 <form action="/" method="get">
     <button type="submit">Logout</button>
 </form>
-<div class="form-container">
-    <form action="/medicines" method="get">
-        <button type="submit">Medicines</button>
-    </form>
-</div>
-<div class="form-container">
-    <form action="/diseases" method="get">
-        <button type="submit">Diseases</button>
-    </form>
-</div>
-<div class="form-container">
-    <form action="/test" method="get">
-        <button type="submit">Diagnosis</button>
-    </form>
-</div>
+<form action="/medicines" method="get" class="form-container">
+    <button type="submit">Medicines</button>
+</form>
+<form action="/diseases" method="get" class="form-container">
+    <button type="submit">Diseases</button>
+</form>
+
+<form action="/diagnosis" method="get" class="form-container">
+    <button type="submit">Diagnosis</button>
+</form>
 <h2>Patients</h2>
 <table>
     <thead>

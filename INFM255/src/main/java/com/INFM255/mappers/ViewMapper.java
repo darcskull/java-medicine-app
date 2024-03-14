@@ -1,9 +1,6 @@
 package com.INFM255.mappers;
 
-import com.INFM255.data.Medicine;
-import com.INFM255.data.MedicineView;
-import com.INFM255.data.Order;
-import com.INFM255.data.OrderView;
+import com.INFM255.data.*;
 
 public class ViewMapper {
 
@@ -26,6 +23,19 @@ public class ViewMapper {
                 .description(medicine.getDescription())
                 .disease(disease)
                 .price(medicine.getPrice())
+                .build();
+    }
+
+    public static DiagnosisView mapToDiagnosisView(User user, Disease disease){
+        return DiagnosisView.builder()
+                .diseaseType(disease.getType())
+                .diseaseDescription(disease.getDescription())
+                .diseaseName(disease.getName())
+                .email(user.getEmail())
+                .personalNumber(user.getPersonalNumber())
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .phoneNumber(user.getPhoneNumber())
                 .build();
     }
 }
