@@ -42,21 +42,7 @@ public class UserRepository {
         String query = "SELECT * FROM \"USER\" WHERE email = ? AND password = ?";
         List<Map<String, Object>> rows = jdbcTemplate.queryForList(query, email, password);
 
-        if (rows.isEmpty()) {
-            return null;
-        }
-
-        Map<String, Object> row = rows.get(0);
-        User user = new User();
-        user.setId((Integer) row.get("id"));
-        user.setFirstName((String) row.get("firstName"));
-        user.setLastName((String) row.get("lastName"));
-        user.setEmail((String) row.get("email"));
-        user.setPhoneNumber((String) row.get("phoneNumber"));
-        user.setPersonalNumber((String) row.get("personalNumber"));
-        user.setIsDoctor((Boolean) row.get("isDoctor"));
-
-        return user;
+        return getUser(rows);
     }
 
     public void createUser(User user) {
@@ -76,6 +62,31 @@ public class UserRepository {
         String query = "SELECT COUNT(*) FROM \"USER\" WHERE email = ?";
         int count = jdbcTemplate.queryForObject(query, Integer.class, email);
         return count > 0;
+    }
+
+    public User findUserById(int userId) {
+        String query = "SELECT * FROM \"USER\" WHERE id = ?";
+        List<Map<String, Object>> rows = jdbcTemplate.queryForList(query, userId);
+
+        return getUser(rows);
+    }
+
+    private User getUser(List<Map<String, Object>> rows) {
+        if (rows.isEmpty()) {
+            return null;
+        }
+
+        Map<String, Object> row = rows.get(0);
+        User user = new User();
+        user.setId((Integer) row.get("id"));
+        user.setFirstName((String) row.get("firstName"));
+        user.setLastName((String) row.get("lastName"));
+        user.setEmail((String) row.get("email"));
+        user.setPhoneNumber((String) row.get("phoneNumber"));
+        user.setPersonalNumber((String) row.get("personalNumber"));
+        user.setIsDoctor((Boolean) row.get("isDoctor"));
+
+        return user;
     }
 
 }

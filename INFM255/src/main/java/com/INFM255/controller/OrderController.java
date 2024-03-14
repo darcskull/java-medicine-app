@@ -1,6 +1,6 @@
 package com.INFM255.controller;
 
-import com.INFM255.data.Order;
+import com.INFM255.data.OrderView;
 import com.INFM255.data.User;
 import com.INFM255.service.OrderService;
 import jakarta.servlet.http.HttpSession;
@@ -20,7 +20,7 @@ public class OrderController {
     @GetMapping("/orders")
     public String findOrdersForUser(HttpSession session, Model model) {
         User user = (User) session.getAttribute("loggedInUser");
-        List<Order> availableOrders = orderService.findOrdersForUser(user.getId());
+        List<OrderView> availableOrders = orderService.findOrdersForUser(user.getId());
         model.addAttribute("orderList", availableOrders);
         return "patients/orders";
     }

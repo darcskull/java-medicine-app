@@ -17,6 +17,28 @@ public class UserController {
 
     private final UserService userService;
 
+    @GetMapping("/")
+    public String loginPage() {
+        return "login";
+    }
+
+    @GetMapping("/reg")
+    public String registrationPage() {
+        return "registration";
+    }
+
+    @GetMapping("/patients")
+    public String getAllPatients(Model model) {
+        model.addAttribute("users", userService.getAllPatients());
+        return "doctors/table";
+    }
+
+    @GetMapping("/doctors")
+    public String getAllDoctors(Model model) {
+        model.addAttribute("users", userService.getAllDoctors());
+        return "patients/table";
+    }
+
     @PostMapping("/login")
     public ResponseEntity<User> login(@RequestBody Map<String, String> loginRequest, HttpSession session) {
         String email = loginRequest.get("email");

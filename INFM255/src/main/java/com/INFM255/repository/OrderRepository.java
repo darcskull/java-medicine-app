@@ -1,7 +1,6 @@
 package com.INFM255.repository;
 
 import com.INFM255.data.Order;
-import com.INFM255.data.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
@@ -39,11 +38,6 @@ public class OrderRepository {
         }
 
         return orders;
-    }
-
-    public void deleteOrderById(Integer orderId) {
-        String query = "DELETE FROM \"ORDER\" WHERE id = ?";
-        jdbcTemplate.update(query, orderId);
     }
 
     public void createOrder(Order order) {

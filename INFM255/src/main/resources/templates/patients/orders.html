@@ -23,23 +23,23 @@
 <table>
     <thead>
     <tr>
-        <th>ID</th>
-        <th>Medicine ID</th>
-        <th>Number</th>
+        <th>Order Number</th>
+        <th>Medicine</th>
+        <th>Quantity</th>
         <th>Price</th>
         <th>Address</th>
-        <th>User ID</th>
+        <th>Email</th>
         <th>Phone Number</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="order : ${orderList}">
         <td th:text="${order.id}"></td>
-        <td th:text="${order.medicineId}"></td>
+        <td th:text="${order.medicine}"></td>
         <td th:text="${order.number}"></td>
         <td th:text="${order.price}"></td>
         <td th:text="${order.address}"></td>
-        <td th:text="${order.userId}"></td>
+        <td th:text="${order.userEmail}"></td>
         <td th:text="${order.phoneNumber}"></td>
     </tr>
     </tbody>
