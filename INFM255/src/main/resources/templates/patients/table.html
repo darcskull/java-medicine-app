@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <title>Object Table</title>
     <style>
+        .form-container {
+            display: inline-block;
+        }
         table {
             border-collapse: collapse;
             width: 100%;
@@ -39,13 +42,13 @@
 <form action="/" method="get">
     <button type="submit">Logout</button>
 </form>
-<form action="/test" method="get">
+<form action="/test" method="get" class="form-container">
 <button type="submit">Medicines</button>
 </form>
-<form action="/test" method="get">
+<form action="/test" method="get" class="form-container">
     <button type="submit">Diseases</button>
 </form>
-<form action="/orders" method="get">
+<form action="/orders" method="get" class="form-container">
     <button type="submit">Orders</button>
 </form>
 <h2>Available Doctors</h2>

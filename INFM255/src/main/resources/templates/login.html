@@ -60,20 +60,22 @@
     </script>
 </head>
 <body>
+<form action="/reg" method="get">
+    <button type="submit">Register</button>
+</form>
 <h2>Login</h2>
 <form>
+    <div>Email:</div>
     <div>
-        <label for="email">Email</label>
+        <label for="email"></label>
         <input type="email" id="email" name="email" required>
     </div>
+    <div>Password:</div>
     <div>
-        <label for="password">Password</label>
+        <label for="password"></label>
         <input type="password" id="password" name="password" required>
     </div>
     <button type="button" onclick="login()">Login</button>
-</form>
-<form action="/reg" method="get">
-    <button type="submit">Register</button>
 </form>
 
 <div id="errorMessage" style="color: red;"></div>

@@ -71,33 +71,39 @@
     </script>
 </head>
 <body>
+<form action="/" method="get">
+    <button type="submit">Return to login page</button>
+</form>
 <h2>User Registration</h2>
 <form>
-    <label for="firstName">First Name:</label>
+    <div>First Name:</div>
+    <label for="firstName"></label>
     <input type="text" id="firstName"  required><br>
 
-    <label for="lastName">Last Name:</label>
+    <div>Last Name:</div>
+    <label for="lastName"></label>
     <input type="text" id="lastName" required><br>
 
-    <label for="password">Password:</label>
+    <div>Password:</div>
+    <label for="password"></label>
     <input type="password" id="password" required><br>
 
-    <label for="email">Email:</label>
+    <div>Email:</div>
+    <label for="email"></label>
     <input type="email" id="email" required><br>
 
-    <label for="phoneNumber">Phone Number:</label>
+    <div>Phone Number:</div>
+    <label for="phoneNumber"></label>
     <input type="text" id="phoneNumber" required><br>
 
-    <label for="personalNumber">Personal Number:</label>
+    <div>Personal Number:</div>
+    <label for="personalNumber"></label>
     <input type="text" id="personalNumber" required><br>
 
     <label for="isDoctor">Are you a doctor?</label>
     <input type="checkbox" id="isDoctor"><br>
 
     <button type="submit" onclick="register()">Register</button>
-</form>
-<form action="/" method="get">
-    <button type="submit">Return to login page</button>
 </form>
 
 <div id="message" style="color: red;"></div>
