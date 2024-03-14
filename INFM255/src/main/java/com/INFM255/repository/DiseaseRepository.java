@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
 
 @Component
 public class DiseaseRepository {
@@ -26,6 +27,24 @@ public class DiseaseRepository {
     public void createDisease(Disease disease) {
         String query = "INSERT INTO DISEASE (id,name, type, description) VALUES (nextval('disease_sequence'),?, ?, ?)";
         jdbcTemplate.update(query, disease.getName(), disease.getType(), disease.getDescription());
+    }
+
+    public Disease findDiseaseById(int id) {
+        String query = "SELECT * FROM DISEASE WHERE id = ?";
+        List<Map<String, Object>> rows = jdbcTemplate.queryForList(query, id);
+
+        if (rows.isEmpty()) {
+            return null;
+        }
+
+        Map<String, Object> row = rows.get(0);
+        Disease disease = new Disease();
+        disease.setId((Integer) row.get("id"));
+        disease.setName((String) row.get("name"));
+        disease.setDescription((String) row.get("description"));
+        disease.setType((String) row.get("type"));
+
+        return disease;
     }
 
 }

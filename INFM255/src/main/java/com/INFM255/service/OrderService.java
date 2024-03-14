@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.INFM255.mappers.OrderMapper.maptoOrderView;
+import static com.INFM255.mappers.ViewMapper.mapToOrderView;
 
 @Service
 @RequiredArgsConstructor
@@ -26,7 +26,7 @@ public class OrderService {
         List<Order> orders = orderRepository.findOrdersByUserId(userId.toString());
         List<OrderView> views = new ArrayList<>();
         for (Order order : orders) {
-            OrderView view = maptoOrderView(order,
+            OrderView view = mapToOrderView(order,
                     userRepository.findUserById(Integer.parseInt(order.getUserId())).getEmail(),
                     medicineRepository.findMedicineById(order.getMedicineId()).getName());
             views.add(view);
