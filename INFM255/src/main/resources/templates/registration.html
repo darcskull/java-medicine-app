@@ -23,7 +23,8 @@
         }
     </style>
     <script>
-        function register() {
+        function register(event) {
+            event.preventDefault();
             var firstName = document.getElementById("firstName").value;
             var lastName = document.getElementById("lastName").value;
             var password = document.getElementById("password").value;
@@ -53,6 +54,10 @@
                     if (response.ok) {
                         console.log("Registration successful");
                         window.location.href = "/";
+                    } else if (response.status === 400) {
+                        message.textContent = "Empty values are not allowed";
+                    } else if (response.status === 409) {
+                        message.textContent = "The email is already registered";
                     } else {
                         console.error("Registration failed");
                         message.textContent = "One or more fields are with invalid value";
@@ -98,7 +103,7 @@
     <label for="isDoctor">Are you a doctor?</label>
     <input type="checkbox" id="isDoctor"><br>
 
-    <button type="submit" onclick="register()">Register</button>
+    <button type="submit" onclick="register(event)">Register</button>
 </form>
 
 <div id="message" style="color: red;"></div>

@@ -50,7 +50,7 @@ public class DiagnosisService {
 
     }
 
-    public void createDiagnosis(Diagnosis diagnosis) {
+    private void createDiagnosis(Diagnosis diagnosis) {
         try {
             diagnosisRepository.createDiagnosis(diagnosis);
         } catch (Exception exception) {

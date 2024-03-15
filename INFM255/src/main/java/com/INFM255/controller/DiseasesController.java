@@ -1,6 +1,7 @@
 package com.INFM255.controller;
 
 import com.INFM255.data.Disease;
+import com.INFM255.data.User;
 import com.INFM255.service.DiseaseService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -27,9 +28,18 @@ public class DiseasesController {
         return "doctors/disease";
     }
 
-    @PostMapping("/create/disease")
-    public ResponseEntity<Void> createDisease(@RequestBody Map<String, String> request, HttpSession session) {
+    @GetMapping("/form/disease")
+    public String registerDiseaseView() {
+        return "doctors/createDisease";
+    }
 
+    @PostMapping("/create/disease")
+    public ResponseEntity<Void> createDisease(@RequestBody Map<String, String> request) {
+        Disease disease = new Disease();
+        disease.setType(request.get("type"));
+        disease.setName(request.get("name"));
+        disease.setDescription(request.get("description"));
+        diseaseService.createDisease(disease);
         return ResponseEntity.ok().build();
     }
 

@@ -41,6 +41,13 @@ public class DiseaseRepository {
         return getDisease(rows);
     }
 
+    public boolean doesDiseaseExist(String name) {
+        String query = "SELECT COUNT(*) FROM DISEASE WHERE name = ?";
+        int count = jdbcTemplate.queryForObject(query, Integer.class, name);
+        return count > 0;
+    }
+
+
     private Disease getDisease(List<Map<String, Object>> rows) {
         if (rows.isEmpty()) {
             return null;

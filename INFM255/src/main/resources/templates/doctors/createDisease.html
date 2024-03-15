@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Disease</title>
+    <style>
+        body {
+            background-color: #f0f0f0;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    <script>
+        function createDisease(event) {
+            event.preventDefault();
+            var type = document.getElementById("type").value;
+            var name = document.getElementById("name").value;
+            var description = document.getElementById("description").value;
+            var errorMessage = document.getElementById("errorMessage");
+
+            errorMessage.textContent = "";
+
+            fetch("/create/disease", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ type: type, name: name, description: description })
+            })
+                .then(response => {
+                    if (response.ok) {
+                        window.location.href = "/diseases";
+                    } else if (response.status === 400) {
+                        errorMessage.textContent = "Empty values are not allowed";
+                    } else if (response.status === 409) {
+                        errorMessage.textContent = "The disease already exists";
+                    } else {
+                        errorMessage.textContent = "Failed to create disease.";
+                        console.error("Failed to create disease");
+                    }
+                })
+                .catch(error => {
+                    errorMessage.textContent = "An error occurred while creating disease.";
+                    console.error("Error:", error);
+                });
+        }
+    </script>
+</head>
+<body>
+<form action="/" method="get">
+    <button type="submit">Logout</button>
+</form>
+<form action="/diseases" method="get">
+    <button type="submit">Back to Diseases</button>
+</form>
+<h2>Create Disease</h2>
+<form>
+    <div>Disease Type:</div>
+    <div>
+        <input type="text" id="type" name="type" required>
+    </div>
+    <div>Disease Name:</div>
+    <div>
+        <input type="text" id="name" name="name" required>
+    </div>
+    <div>Disease Description:</div>
+    <div>
+        <textarea id="description" name="description" required></textarea>
+    </div>
+    <button type="button" onclick="createDisease(event)">Create Disease</button>
+</form>
+
+<div id="errorMessage" style="color: red;"></div>
+
+</body>
+</html>
