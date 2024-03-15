@@ -1,7 +1,9 @@
 package com.INFM255.service;
 
+import com.INFM255.data.Medicine;
 import com.INFM255.data.Order;
 import com.INFM255.data.OrderView;
+import com.INFM255.exception.BadRequestException;
 import com.INFM255.exception.GeneralException;
 import com.INFM255.repository.MedicineRepository;
 import com.INFM255.repository.OrderRepository;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static com.INFM255.mappers.ViewMapper.mapToOrderView;
 
@@ -35,7 +38,12 @@ public class OrderService {
         return views;
     }
 
-    public void createOrder(Order order) {
+    public void createOrder(Order order, String medicineName) {
+        if (Objects.equals(order.getAddress(), "")) {
+            throw new BadRequestException("Empty values are not allowed");
+        }
+        Medicine medicine = medicineRepository.findMedicineByName(medicineName);
+        order.setMedicineId(medicine.getId());
         try {
             orderRepository.createOrder(order);
         } catch (Exception exception) {

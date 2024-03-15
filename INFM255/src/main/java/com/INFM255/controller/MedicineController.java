@@ -56,14 +56,10 @@ public class MedicineController {
     @GetMapping("/personal/medicines")
     public String getPersonalMedicines(HttpSession session, Model model) {
         User user = (User) session.getAttribute("loggedInUser");
-        List<MedicineView> views = getPersonalMedicine(user.getId());
+        List<Disease> diseases = diagnosisService.findPersonalDiseases(user.getId());
+        List<MedicineView> views = medicineService.getPersonalMedicines(diseases);
         model.addAttribute("medicines", views);
         return "patients/personalMedicines";
-    }
-
-    private List<MedicineView> getPersonalMedicine(Integer userId){
-        List<Disease> diseases = diagnosisService.findPersonalDiseases(userId);
-        return medicineService.getPersonalMedicines(diseases);
     }
 
 }

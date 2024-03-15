@@ -1,14 +1,12 @@
 package com.INFM255.repository;
 
 import com.INFM255.data.Medicine;
-import com.INFM255.data.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -45,7 +43,23 @@ public class MedicineRepository {
     public Medicine findMedicineById(int medicineId) {
         String query = "SELECT * FROM MEDICINE WHERE id = ?";
         List<Map<String, Object>> rows = jdbcTemplate.queryForList(query, medicineId);
+        return getMedicine(rows);
+    }
 
+    public Medicine findMedicineByName(String name) {
+        String query = "SELECT * FROM MEDICINE WHERE name = ?";
+        List<Map<String, Object>> rows = jdbcTemplate.queryForList(query, name);
+        return getMedicine(rows);
+    }
+
+
+    public boolean doesMedicineExistByName(String name) {
+        String query = "SELECT COUNT(*) FROM MEDICINE WHERE name = ?";
+        int count = jdbcTemplate.queryForObject(query, Integer.class, name);
+        return count > 0;
+    }
+
+    private Medicine getMedicine(List<Map<String, Object>> rows) {
         if (rows.isEmpty()) {
             return null;
         }
@@ -59,12 +73,6 @@ public class MedicineRepository {
         medicine.setPrice((BigDecimal) row.get("price"));
 
         return medicine;
-    }
-
-    public boolean doesMedicineExistByName(String name) {
-        String query = "SELECT COUNT(*) FROM MEDICINE WHERE name = ?";
-        int count = jdbcTemplate.queryForObject(query, Integer.class, name);
-        return count > 0;
     }
 
 

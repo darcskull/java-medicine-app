@@ -1,8 +1,8 @@
 package com.INFM255.controller;
 
-import com.INFM255.data.Order;
-import com.INFM255.data.OrderView;
-import com.INFM255.data.User;
+import com.INFM255.data.*;
+import com.INFM255.service.DiagnosisService;
+import com.INFM255.service.MedicineService;
 import com.INFM255.service.OrderService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +22,8 @@ import java.util.Map;
 public class OrderController {
 
     private final OrderService orderService;
+    private final MedicineService medicineService;
+    private final DiagnosisService diagnosisService;
 
     @GetMapping("/orders")
     public String findOrdersForUser(HttpSession session, Model model) {
@@ -34,15 +36,24 @@ public class OrderController {
     @PostMapping("/create/order")
     public ResponseEntity<Void> createOrder(@RequestBody Map<String, String> request, HttpSession session) {
         Order order = new Order();
-        order.setMedicineId(Integer.valueOf(request.get("medicineId")));
+        String medicine = request.get("medicineName");
         order.setAddress(request.get("address"));
         order.setPrice(new BigDecimal(request.get("price")));
         order.setNumber(Integer.valueOf(request.get("number")));
         User user = (User) session.getAttribute("loggedInUser");
         order.setPhoneNumber(user.getPhoneNumber());
         order.setUserId(user.getId().toString());
-        orderService.createOrder(order);
+        orderService.createOrder(order, medicine);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/order/form")
+    public String getOrderForm(HttpSession session, Model model) {
+        User user = (User) session.getAttribute("loggedInUser");
+        List<Disease> diseases = diagnosisService.findPersonalDiseases(user.getId());
+        List<MedicineView> views = medicineService.getPersonalMedicines(diseases);
+        model.addAttribute("medicines", views);
+        return "patients/createOrder";
     }
 
 }

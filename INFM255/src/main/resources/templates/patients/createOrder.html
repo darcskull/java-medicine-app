@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Order</title>
+    <style>
+        .form-container {
+            display: inline-block;
+        }
+
+        body {
+            background-color: #f0f0f0;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    <script>
+        function createOrder(event) {
+            event.preventDefault();
+            var address = document.getElementById("address").value;
+            var number = document.getElementById("number").value;
+            var price = document.getElementById("price").value;
+            var medicineDropdown = document.getElementById("medicine");
+            var medicineName = medicineDropdown.options[medicineDropdown.selectedIndex].value;
+            var errorMessage = document.getElementById("errorMessage");
+
+            errorMessage.textContent = "";
+
+            fetch("/create/order", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({address: address, number: number, price: price, medicineName: medicineName})
+            })
+                .then(response => {
+                    if (response.ok) {
+                        window.location.href = "/orders";
+                    } else if (response.status === 400) {
+                        errorMessage.textContent = "Empty values are not allowed";
+                    } else {
+                        errorMessage.textContent = "Failed to create order.";
+                        console.error("Failed to create order");
+                    }
+                })
+                .catch(error => {
+                    errorMessage.textContent = "An error occurred while creating order.";
+                    console.error("Error:", error);
+                });
+        }
+
+        function updatePrice() {
+          var medicineSelect = document.getElementById("medicine");
+          var selectedMedicineIndex = medicineSelect.selectedIndex;
+          var selectedMedicinePrice = parseFloat(medicineSelect.options[selectedMedicineIndex].text.split(' ')[1]);
+          var quantity = parseInt(document.getElementById("number").value);
+          var totalPrice = selectedMedicinePrice * quantity;
+          document.getElementById("price").value = totalPrice.toFixed(2);
+        }
+
+
+        window.onload = function () {
+            updatePrice();
+        };
+    </script>
+</head>
+<body>
+<form action="/" method="get">
+    <button type="submit">Logout</button>
+</form>
+<form action="/orders" method="get" class="form-container">
+    <button type="submit">Back to Orders</button>
+</form>
+<form action="/medicines" method="get" class="form-container">
+    <button type="submit">Back to Medicines</button>
+</form>
+<h2>Create Order</h2>
+<form>
+    <div>Address:</div>
+    <div>
+        <input type="text" id="address" name="address" required>
+    </div>
+    <div>Quantity:</div>
+    <div>
+        <input type="number" id="number" name="number" value="1" min="1" required onchange="updatePrice()">
+    </div>
+    <div>Price $:</div>
+    <div>
+        <input type="text" id="price" name="price" value="0" readonly required pattern="\d+(\.\d+)?">
+    </div>
+    <div>Medicine + Price $:</div>
+    <div>
+        <select id="medicine" name="medicine" required>
+            <option th:each="medicine : ${medicines}" th:value="${medicine.name}"
+                    th:text="${medicine.name + ' ' + medicine.price}"></option>
+        </select>
+    </div>
+    <button type="button" onclick="createOrder(event)">Create Order</button>
+</form>
+
+<div id="errorMessage" style="color: red;"></div>
+
+</body>
+</html>
