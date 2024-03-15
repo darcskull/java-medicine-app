@@ -6,8 +6,10 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Map;
 
@@ -60,13 +62,6 @@ public class UserController {
         user.setIsDoctor(Boolean.valueOf(registrationRequest.get("isDoctor")));
         userService.registerUser(user);
         return ResponseEntity.ok(user);
-    }
-
-    @GetMapping("/test")
-    public String threadTest(HttpSession session, Model model) {
-        User user = (User) session.getAttribute("loggedInUser");
-        model.addAttribute("stringValue", user.toString());
-        return "test";
     }
 
 }

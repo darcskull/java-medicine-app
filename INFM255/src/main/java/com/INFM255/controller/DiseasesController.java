@@ -1,9 +1,7 @@
 package com.INFM255.controller;
 
 import com.INFM255.data.Disease;
-import com.INFM255.data.User;
 import com.INFM255.service.DiseaseService;
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;

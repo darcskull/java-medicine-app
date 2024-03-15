@@ -60,7 +60,6 @@ public class UserService {
 
     }
 
-
     private boolean isValidPhoneNumber(String phoneNumber) {
         String regex = "08\\d{8}";
 

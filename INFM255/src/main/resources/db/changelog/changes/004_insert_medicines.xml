@@ -1,0 +1,70 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <changeSet id="insert_sample_diseases" author="martin">
+        <insert tableName="Medicine">
+            <column name="id" valueComputed="nextval('medicine_sequence')"/>
+            <column name="name" value="Aspirin"/>
+            <column name="description" value="Pain reliever"/>
+            <column name="diseaseId" value="1"/>
+            <column name="price" value="10.99"/>
+        </insert>
+        <insert tableName="Medicine">
+            <column name="id" valueComputed="nextval('medicine_sequence')"/>
+            <column name="name" value="Tylenol"/>
+            <column name="description" value="Fever reducer"/>
+            <column name="diseaseId" value="2"/>
+            <column name="price" value="8.99"/>
+        </insert>
+        <insert tableName="Medicine">
+            <column name="id" valueComputed="nextval('medicine_sequence')"/>
+            <column name="name" value="Paracetamol"/>
+            <column name="description" value="Pain reliever and fever reducer"/>
+            <column name="diseaseId" value="3"/>
+            <column name="price" value="5.99"/>
+        </insert>
+        <insert tableName="Medicine">
+            <column name="id" valueComputed="nextval('medicine_sequence')"/>
+            <column name="name" value="Ibuprofen"/>
+            <column name="description" value="Nonsteroidal anti-inflammatory drug (NSAID)"/>
+            <column name="diseaseId" value="3"/>
+            <column name="price" value="7.49"/>
+        </insert>
+        <insert tableName="Medicine">
+            <column name="id" valueComputed="nextval('medicine_sequence')"/>
+            <column name="name" value="Insulin"/>
+            <column name="description" value="Hormone used to treat diabetes"/>
+            <column name="diseaseId" value="4"/>
+            <column name="price" value="15.99"/>
+        </insert>
+        <insert tableName="Medicine">
+            <column name="id" valueComputed="nextval('medicine_sequence')"/>
+            <column name="name" value="Metformin"/>
+            <column name="description" value="Medication used to treat type 2 diabetes"/>
+            <column name="diseaseId" value="4"/>
+            <column name="price" value="12.49"/>
+        </insert>
+        <insert tableName="Medicine">
+            <column name="id" valueComputed="nextval('medicine_sequence')"/>
+            <column name="name" value="Lisinopril"/>
+            <column name="description" value="Medication used to treat high blood pressure"/>
+            <column name="diseaseId" value="5"/>
+            <column name="price" value="9.99"/>
+        </insert>
+        <insert tableName="Medicine">
+            <column name="id" valueComputed="nextval('medicine_sequence')"/>
+            <column name="name" value="Naproxen"/>
+            <column name="description" value="Nonsteroidal anti-inflammatory drug (NSAID)"/>
+            <column name="diseaseId" value="6"/>
+            <column name="price" value="6.79"/>
+        </insert>
+        <insert tableName="Medicine">
+            <column name="id" valueComputed="nextval('medicine_sequence')"/>
+            <column name="name" value="Albuterol"/>
+            <column name="description" value="Bronchodilator used to treat asthma"/>
+            <column name="diseaseId" value="7"/>
+            <column name="price" value="10.99"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

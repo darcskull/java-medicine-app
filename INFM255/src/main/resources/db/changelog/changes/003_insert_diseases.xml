@@ -1,0 +1,49 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <changeSet id="insert_sample_diseases" author="martin">
+        <insert tableName="Disease">
+            <column name="id" valueComputed="nextval('disease_sequence')"/>
+            <column name="name" value="Cold"/>
+            <column name="type" value="Viral"/>
+            <column name="description" value="Common viral infection"/>
+        </insert>
+        <insert tableName="Disease">
+            <column name="id" valueComputed="nextval('disease_sequence')"/>
+            <column name="name" value="Flu"/>
+            <column name="type" value="Viral"/>
+            <column name="description" value="Influenza viral infection"/>
+        </insert>
+        <insert tableName="Disease">
+            <column name="id" valueComputed="nextval('disease_sequence')"/>
+            <column name="name" value="Headache"/>
+            <column name="type" value="General"/>
+            <column name="description" value="Pain in the head or upper neck"/>
+        </insert>
+        <insert tableName="Disease">
+            <column name="id" valueComputed="nextval('disease_sequence')"/>
+            <column name="name" value="Diabetes"/>
+            <column name="type" value="Metabolic"/>
+            <column name="description" value="A group of diseases that result in too much sugar in the blood (high blood glucose)"/>
+        </insert>
+        <insert tableName="Disease">
+            <column name="id" valueComputed="nextval('disease_sequence')"/>
+            <column name="name" value="Hypertension"/>
+            <column name="type" value="Cardiovascular"/>
+            <column name="description" value="High blood pressure"/>
+        </insert>
+        <insert tableName="Disease">
+            <column name="id" valueComputed="nextval('disease_sequence')"/>
+            <column name="name" value="Arthritis"/>
+            <column name="type" value="Musculoskeletal"/>
+            <column name="description" value="Inflammation of one or more joints"/>
+        </insert>
+        <insert tableName="Disease">
+            <column name="id" valueComputed="nextval('disease_sequence')"/>
+            <column name="name" value="Asthma"/>
+            <column name="type" value="Respiratory"/>
+            <column name="description" value="Chronic respiratory disease characterized by variable airflow obstruction and inflammation"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

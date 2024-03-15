@@ -1,0 +1,47 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <changeSet id="insert_sample_diagnoses" author="martin">
+        <insert tableName="Diagnosis">
+            <column name="id" valueComputed="nextval('diagnosis_sequence')"/>
+            <column name="userId" value="1"/>
+            <column name="diseaseId" value="1"/>
+        </insert>
+        <insert tableName="Diagnosis">
+            <column name="id" valueComputed="nextval('diagnosis_sequence')"/>
+            <column name="userId" value="1"/>
+            <column name="diseaseId" value="7"/>
+        </insert>
+        <insert tableName="Diagnosis">
+            <column name="id" valueComputed="nextval('diagnosis_sequence')"/>
+            <column name="userId" value="1"/>
+            <column name="diseaseId" value="6"/>
+        </insert>
+        <insert tableName="Diagnosis">
+            <column name="id" valueComputed="nextval('diagnosis_sequence')"/>
+            <column name="userId" value="1"/>
+            <column name="diseaseId" value="5"/>
+        </insert>
+        <insert tableName="Diagnosis">
+            <column name="id" valueComputed="nextval('diagnosis_sequence')"/>
+            <column name="userId" value="1"/>
+            <column name="diseaseId" value="4"/>
+        </insert>
+        <insert tableName="Diagnosis">
+            <column name="id" valueComputed="nextval('diagnosis_sequence')"/>
+            <column name="userId" value="3"/>
+            <column name="diseaseId" value="3"/>
+        </insert>
+        <insert tableName="Diagnosis">
+            <column name="id" valueComputed="nextval('diagnosis_sequence')"/>
+            <column name="userId" value="3"/>
+            <column name="diseaseId" value="2"/>
+        </insert>
+        <insert tableName="Diagnosis">
+            <column name="id" valueComputed="nextval('diagnosis_sequence')"/>
+            <column name="userId" value="3"/>
+            <column name="diseaseId" value="1"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

@@ -5,6 +5,10 @@
                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
 
     <include file="/db/changelog/changes/001_create_tables.xml"/>
-    <include file="/db/changelog/changes/002_insert_data.xml"/>
+    <include file="/db/changelog/changes/002_insert_users.xml"/>
+    <include file="/db/changelog/changes/003_insert_diseases.xml"/>
+    <include file="/db/changelog/changes/004_insert_medicines.xml"/>
+    <include file="/db/changelog/changes/005_insert_diagnoses.xml"/>
+    <include file="/db/changelog/changes/006_insert_orders.xml"/>
 
 </databaseChangeLog>

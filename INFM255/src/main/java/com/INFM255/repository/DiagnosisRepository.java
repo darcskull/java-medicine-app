@@ -1,7 +1,6 @@
 package com.INFM255.repository;
 
 import com.INFM255.data.Diagnosis;
-import com.INFM255.data.Disease;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
