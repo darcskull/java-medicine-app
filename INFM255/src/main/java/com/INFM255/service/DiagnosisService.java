@@ -2,6 +2,9 @@ package com.INFM255.service;
 
 import com.INFM255.data.Diagnosis;
 import com.INFM255.data.DiagnosisView;
+import com.INFM255.data.Disease;
+import com.INFM255.data.User;
+import com.INFM255.exception.ConflictException;
 import com.INFM255.exception.GeneralException;
 import com.INFM255.repository.DiagnosisRepository;
 import com.INFM255.repository.DiseaseRepository;
@@ -31,6 +34,20 @@ public class DiagnosisService {
             viewList.add(view);
         }
         return viewList;
+    }
+
+    public void createDiagnosis(String email, String diseaseName) {
+        User user = userRepository.findUserByEmail(email);
+        Disease disease = diseaseRepository.findDiseaseByName(diseaseName);
+
+        if (diagnosisRepository.checkExistence(user.getId(), disease.getId())) {
+            throw new ConflictException("The record already exist");
+        }
+        Diagnosis diagnosis = new Diagnosis();
+        diagnosis.setDiseaseId(disease.getId());
+        diagnosis.setUserId(user.getId());
+        createDiagnosis(diagnosis);
+
     }
 
     public void createDiagnosis(Diagnosis diagnosis) {

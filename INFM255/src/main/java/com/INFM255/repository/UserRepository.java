@@ -45,6 +45,13 @@ public class UserRepository {
         return getUser(rows);
     }
 
+    public User findUserByEmail(String email) {
+        String query = "SELECT * FROM \"USER\" WHERE email = ?";
+        List<Map<String, Object>> rows = jdbcTemplate.queryForList(query, email);
+
+        return getUser(rows);
+    }
+
     public void createUser(User user) {
         String query = "INSERT INTO \"USER\" (id, firstName, lastName, email, password, phoneNumber, personalNumber, isDoctor) " +
                 "VALUES (nextval('user_sequence'),?, ?, ?, ?, ?, ?, ?)";

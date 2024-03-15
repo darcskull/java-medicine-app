@@ -34,4 +34,10 @@ public class DiagnosisRepository {
         return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(Diagnosis.class));
     }
 
+    public boolean checkExistence(int userId, int diseaseId) {
+        String query = "SELECT COUNT(*) FROM DIAGNOSIS WHERE userId = ? AND diseaseId = ?";
+        int count = jdbcTemplate.queryForObject(query, new Object[]{userId, diseaseId}, Integer.class);
+        return count > 0;
+    }
+
 }

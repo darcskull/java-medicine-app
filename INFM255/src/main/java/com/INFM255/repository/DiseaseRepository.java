@@ -32,7 +32,16 @@ public class DiseaseRepository {
     public Disease findDiseaseById(int id) {
         String query = "SELECT * FROM DISEASE WHERE id = ?";
         List<Map<String, Object>> rows = jdbcTemplate.queryForList(query, id);
+        return getDisease(rows);
+    }
 
+    public Disease findDiseaseByName(String name) {
+        String query = "SELECT * FROM DISEASE WHERE name = ?";
+        List<Map<String, Object>> rows = jdbcTemplate.queryForList(query, name);
+        return getDisease(rows);
+    }
+
+    private Disease getDisease(List<Map<String, Object>> rows) {
         if (rows.isEmpty()) {
             return null;
         }
