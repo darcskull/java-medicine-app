@@ -56,4 +56,11 @@ public class MedicineRepository {
         return medicine;
     }
 
+    public boolean doesMedicineExistByName(String name) {
+        String query = "SELECT COUNT(*) FROM MEDICINE WHERE name = ?";
+        int count = jdbcTemplate.queryForObject(query, Integer.class, name);
+        return count > 0;
+    }
+
+
 }

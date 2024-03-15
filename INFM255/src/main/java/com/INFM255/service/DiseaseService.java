@@ -17,7 +17,7 @@ public class DiseaseService {
 
     private final DiseaseRepository diseaseRepository;
 
-    public List<Disease> findAllDiseases(){
+    public List<Disease> findAllDiseases() {
         return diseaseRepository.findAllDiseases();
     }
 
@@ -28,7 +28,7 @@ public class DiseaseService {
             throw new BadRequestException("Empty values are not allowed");
         }
 
-        if(diseaseRepository.doesDiseaseExist(disease.getName())){
+        if (diseaseRepository.doesDiseaseExist(disease.getName())) {
             throw new ConflictException("The disease is already registered");
         }
 

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Medicine</title>
+    <style>
+        body {
+            background-color: #f0f0f0;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    <script>
+        function createMedicine(event) {
+            event.preventDefault();
+            var name = document.getElementById("name").value;
+            var description = document.getElementById("description").value;
+            var price = document.getElementById("price").value;
+            var diseaseDropdown = document.getElementById("diseaseName");
+            var diseaseName = diseaseDropdown.options[diseaseDropdown.selectedIndex].text;
+            var errorMessage = document.getElementById("errorMessage");
+
+            errorMessage.textContent = "";
+
+            fetch("/create/medicine", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ name: name, description: description, price: price, diseaseName: diseaseName })
+            })
+                .then(response => {
+                    if (response.ok) {
+                        window.location.href = "/medicines";
+                    } else if (response.status === 400) {
+                        errorMessage.textContent = "Empty values are not allowed";
+                    } else if (response.status === 409) {
+                        errorMessage.textContent = "The medicine already exists";
+                    } else {
+                        errorMessage.textContent = "Failed to create medicine.";
+                        console.error("Failed to create medicine");
+                    }
+                })
+                .catch(error => {
+                    errorMessage.textContent = "An error occurred while creating medicine.";
+                    console.error("Error:", error);
+                });
+        }
+    </script>
+</head>
+<body>
+<form action="/" method="get">
+    <button type="submit">Logout</button>
+</form>
+<form action="/medicines" method="get">
+    <button type="submit">Back to Medicines</button>
+</form>
+<h2>Create Medicine</h2>
+<form>
+    <div>Medicine Name:</div>
+    <div>
+        <input type="text" id="name" name="name" required>
+    </div>
+    <div>Medicine Description:</div>
+    <div>
+        <textarea id="description" name="description" required></textarea>
+    </div>
+    <div>Price:</div>
+    <div>
+        <input type="text" id="price" name="price" value="0" required pattern="\d+(\.\d+)?">
+    </div>
+    <div>Disease Name:</div>
+    <div>
+        <select id="diseaseName" name="diseaseName" required>
+            <option th:each="disease : ${diseases}" th:value="${disease.name}" th:text="${disease.name}"></option>
+        </select>
+    </div>
+    <button type="button" onclick="createMedicine(event)">Create Medicine</button>
+</form>
+
+<div id="errorMessage" style="color: red;"></div>
+
+</body>
+</html>
