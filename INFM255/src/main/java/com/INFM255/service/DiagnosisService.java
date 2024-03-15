@@ -36,6 +36,17 @@ public class DiagnosisService {
         return viewList;
     }
 
+    public List<Disease> findPersonalDiseases(Integer userId){
+        List<Diagnosis> diagnosisList = diagnosisRepository.findDiagnosesByUserId(userId);
+        List<Disease> diseases = new ArrayList<>();
+        for(Diagnosis diagnosis: diagnosisList){
+            Disease newDisease = diseaseRepository.findDiseaseById(diagnosis.getDiseaseId());
+            diseases.add(newDisease);
+        }
+
+        return diseases;
+    }
+
     public void createDiagnosis(String email, String diseaseName) {
         User user = userRepository.findUserByEmail(email);
         Disease disease = diseaseRepository.findDiseaseByName(diseaseName);

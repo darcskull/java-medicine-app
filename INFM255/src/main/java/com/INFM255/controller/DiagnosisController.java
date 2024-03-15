@@ -6,6 +6,7 @@ import com.INFM255.data.User;
 import com.INFM255.service.DiagnosisService;
 import com.INFM255.service.DiseaseService;
 import com.INFM255.service.UserService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -47,6 +48,14 @@ public class DiagnosisController {
         String disease = request.get("diseaseName");
         diagnosisService.createDiagnosis(userEmail, disease);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/personal/diagnoses")
+    public String getPersonalDiagnoses(HttpSession session, Model model) {
+        User user = (User) session.getAttribute("loggedInUser");
+        List<Disease> diseases = diagnosisService.findPersonalDiseases(user.getId());
+        model.addAttribute("diseases", diseases);
+        return "patients/personalDiseases";
     }
 
 }

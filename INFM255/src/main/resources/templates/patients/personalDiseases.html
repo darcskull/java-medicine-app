@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Object Table</title>
+    <title>Personal Diseases</title>
     <style>
         .form-container {
             display: inline-block;
@@ -12,7 +12,7 @@
             width: 100%;
         }
         th, td {
-            border: 1px solid black;
+            border: 1px solid #ddd;
             padding: 8px;
             text-align: left;
         }
@@ -42,33 +42,29 @@
 <form action="/" method="get">
     <button type="submit">Logout</button>
 </form>
-<form action="/test" method="get" class="form-container">
-<button type="submit">Personal Medicines</button>
+<form action="/doctors" method="get" class="form-container">
+    <button type="submit">List with Doctors</button>
 </form>
-<form action="/personal/diagnoses" method="get" class="form-container">
-    <button type="submit">Personal Diseases</button>
+<form action="/test" method="get" class="form-container">
+    <button type="submit">Personal Medicine</button>
 </form>
 <form action="/orders" method="get" class="form-container">
-    <button type="submit">Personal Orders</button>
+    <button type="submit">Order List</button>
 </form>
-<h2>Available Doctors</h2>
+<h2>Personal Diseases</h2>
 <table>
     <thead>
     <tr>
-        <th>ID</th>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Email</th>
-        <th>Phone Number</th>
+        <th>Disease Name</th>
+        <th>Description</th>
+        <th>Disease Type</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="user : ${users}">
-        <td th:text="${user.id}"></td>
-        <td th:text="${user.firstName}"></td>
-        <td th:text="${user.lastName}"></td>
-        <td th:text="${user.email}"></td>
-        <td th:text="${user.phoneNumber}"></td>
+    <tr th:each="disease : ${diseases}">
+        <td th:text="${disease.name}"></td>
+        <td th:text="${disease.description}"></td>
+        <td th:text="${disease.type}"></td>
     </tr>
     </tbody>
 </table>
