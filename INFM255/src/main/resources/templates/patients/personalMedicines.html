@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Personal Diseases</title>
+    <title>Personal Medicines</title>
     <style>
         .form-container {
             display: inline-block;
@@ -45,26 +45,28 @@
 <form action="/doctors" method="get" class="form-container">
     <button type="submit">List with Doctors</button>
 </form>
-<form action="/personal/medicines" method="get" class="form-container">
-    <button type="submit">Personal Medicine</button>
+<form action="/personal/diagnoses" method="get" class="form-container">
+    <button type="submit">Personal Diseases</button>
 </form>
 <form action="/orders" method="get" class="form-container">
     <button type="submit">Order List</button>
 </form>
-<h2>Personal Diseases</h2>
+<h2>Personal Medicines</h2>
 <table>
     <thead>
     <tr>
-        <th>Disease Name</th>
+        <th>Medicine Name</th>
         <th>Description</th>
-        <th>Disease Type</th>
+        <th>Price $</th>
+        <th>Disease Name</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="disease : ${diseases}">
-        <td th:text="${disease.name}"></td>
-        <td th:text="${disease.description}"></td>
-        <td th:text="${disease.type}"></td>
+    <tr th:each="medicine : ${medicines}">
+        <td th:text="${medicine.name}"></td>
+        <td th:text="${medicine.description}"></td>
+        <td th:text="${medicine.price}"></td>
+        <td th:text="${medicine.disease}"></td>
     </tr>
     </tbody>
 </table>

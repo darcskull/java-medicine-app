@@ -37,6 +37,11 @@ public class MedicineRepository {
         return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(Medicine.class));
     }
 
+    public List<Medicine> findMedicinesByDiseaseId(Integer diseaseId) {
+        String query = "SELECT * FROM MEDICINE WHERE diseaseId = ?";
+        return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(Medicine.class), diseaseId);
+    }
+
     public Medicine findMedicineById(int medicineId) {
         String query = "SELECT * FROM MEDICINE WHERE id = ?";
         List<Map<String, Object>> rows = jdbcTemplate.queryForList(query, medicineId);

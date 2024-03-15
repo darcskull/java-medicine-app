@@ -35,6 +35,18 @@ public class MedicineService {
         return views;
     }
 
+    public List<MedicineView> getPersonalMedicines(List<Disease> diseases) {
+        List<MedicineView> medicineToDisplay = new ArrayList<>();
+        for (Disease disease : diseases) {
+            List<Medicine> tempList = medicineRepository.findMedicinesByDiseaseId(disease.getId());
+            for (Medicine med : tempList) {
+                MedicineView view = mapToMedicineView(med, disease.getName());
+                medicineToDisplay.add(view);
+            }
+        }
+        return medicineToDisplay;
+    }
+
     public void createMedicine(Medicine medicine, String diseaseName) {
         if (Objects.equals(medicine.getName(), "") || Objects.equals(medicine.getDescription(), "") ||
                 Objects.equals(medicine.getPrice(), BigDecimal.ZERO)) {

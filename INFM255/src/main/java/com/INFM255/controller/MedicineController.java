@@ -3,8 +3,11 @@ package com.INFM255.controller;
 import com.INFM255.data.Disease;
 import com.INFM255.data.Medicine;
 import com.INFM255.data.MedicineView;
+import com.INFM255.data.User;
+import com.INFM255.service.DiagnosisService;
 import com.INFM255.service.DiseaseService;
 import com.INFM255.service.MedicineService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -23,6 +26,7 @@ public class MedicineController {
 
     private final MedicineService medicineService;
     private final DiseaseService diseaseService;
+    private final DiagnosisService diagnosisService;
 
     @GetMapping("/medicines")
     public String findMedicines(Model model) {
@@ -47,6 +51,19 @@ public class MedicineController {
         String diseaseName = request.get("diseaseName");
         medicineService.createMedicine(medicine, diseaseName);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/personal/medicines")
+    public String getPersonalMedicines(HttpSession session, Model model) {
+        User user = (User) session.getAttribute("loggedInUser");
+        List<MedicineView> views = getPersonalMedicine(user.getId());
+        model.addAttribute("medicines", views);
+        return "patients/personalMedicines";
+    }
+
+    private List<MedicineView> getPersonalMedicine(Integer userId){
+        List<Disease> diseases = diagnosisService.findPersonalDiseases(userId);
+        return medicineService.getPersonalMedicines(diseases);
     }
 
 }
